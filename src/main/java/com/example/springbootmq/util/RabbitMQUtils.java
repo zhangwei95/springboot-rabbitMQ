@@ -1,4 +1,4 @@
-package com.example.springbootmq;
+package com.example.springbootmq.util;
 
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
