@@ -1,12 +1,11 @@
 package com.example.springbootmq.controller;
 
+import com.example.springbootmq.sender.OrderSender;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +21,10 @@ public class TestRest {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+
     @Autowired
-    private Environment env;
+    private OrderSender orderSender;
+
 
     private LoadingCache<Long, AtomicLong> counter= CacheBuilder.newBuilder()
             .expireAfterWrite(2, TimeUnit.DAYS)
@@ -43,9 +44,8 @@ public class TestRest {
         //当天第几笔订单
         long l = counter.get(current).incrementAndGet();
         String message="第"+l+"笔订单";
-        rabbitTemplate.setExchange(env.getProperty("user.order.exchange.name"));
-        rabbitTemplate.setRoutingKey(env.getProperty("user.order.routing.key.name"));
-        rabbitTemplate.convertAndSend(MessageBuilder.withBody(message.getBytes("UTF-8")).build());
+        //发送消息
+        orderSender.topicSender(message);
         return message;
     }
 }

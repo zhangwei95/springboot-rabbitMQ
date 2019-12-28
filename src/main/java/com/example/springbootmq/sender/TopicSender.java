@@ -1,4 +1,4 @@
-package com.example.springbootmq;
+package com.example.springbootmq.sender;
 
 import com.example.springbootmq.config.TopicConfig;
 import org.springframework.amqp.core.AmqpTemplate;

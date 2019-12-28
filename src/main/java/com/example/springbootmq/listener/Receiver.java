@@ -1,4 +1,4 @@
-package com.example.springbootmq;
+package com.example.springbootmq.listener;
 
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.AmqpTemplate;

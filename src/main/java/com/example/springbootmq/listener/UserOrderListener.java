@@ -34,7 +34,8 @@ public class UserOrderListener implements ChannelAwareMessageListener {
             // requeue参数表示是否重回队列，如果requeue 参数设置为true ，则RabbitMQ 会重新将这条消息存入队列尾部（注意是队列尾部），
             // 等待继续投递给订阅该队列的消费者，当然也可能是自己；如果requeue 参数设置为false ，则RabbitMQ立即会把消息从队列中移除，
             // 而不会把它发送给新的消费者
-            channel.basicRecover(true);
+            channel.basicReject(tag, true);
+//            channel.basicRecover(true);
 
             //channel.basicReject(deliveryTag, true);
             //        basic.reject方法拒绝deliveryTag对应的消息，第二个参数是否requeue，true则重新入队列，否则丢弃或者进入死信队列。

@@ -1,4 +1,4 @@
-package com.example.springbootmq;
+package com.example.springbootmq.sender;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
