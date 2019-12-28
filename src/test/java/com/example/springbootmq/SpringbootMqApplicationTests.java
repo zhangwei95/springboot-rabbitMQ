@@ -21,8 +21,10 @@ public class SpringbootMqApplicationTests {
 
     @Test
     public void driectTest() {
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-        sender.driectSend("Driect Data：" + sf.format(new Date()));
+        for(int i=0;i<=10000;i++){
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            sender.driectSend("Driect Data：" + sf.format(new Date())+i);
+        }
     }
 
     @Autowired

@@ -1,10 +1,7 @@
 package com.example.springbootmq.config;
 
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,9 +20,12 @@ public class DirectConfig {
         // 参数一：交换器名称；参数二：是否持久化；参数三：是否自动删除消息
         return new DirectExchange(DirectConfig.EXCHANGE_NAME, false, false);
     }
+
     // 绑定“direct”队列到上面配置的“mydirect”路由器
     @Bean
     Binding bindingExchangeDirectQueue(Queue directQueue, DirectExchange directExchange) {
         return BindingBuilder.bind(directQueue).to(directExchange).with(DirectConfig.QUEUE_NAME);
     }
+
+
 }
